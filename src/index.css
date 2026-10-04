@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Warm Saffron Amber & Sacred Terracotta Palette (from Ganesh Artwork) */
+  --amber-canvas: #fbf1e2;
+  --amber-warm: #f6dfbe;
+  --amber-gold: #f5a623;
+  --saffron: #e5901c;
+  --terracotta: #c44e2b;
+  --sacred-red: #9e1822;
+  --deep-crimson: #7a1017;
+  
+  --text-primary: #2c0b0e;
+  --text-secondary: #5c2419;
+  --text-muted: #854a39;
+}
+
+html, body {
+  background-color: var(--amber-canvas);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+.font-editorial-title {
+  font-family: 'Bodoni Moda', 'Playfair Display', serif;
+  letter-spacing: -0.02em;
+}
+
+.font-editorial-italic {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-style: italic;
+}
+
+/* Crystal Frosted Glassmorphism — Translucent, Low-Opacity, Icy-Clear */
+.glass-regal {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(250, 235, 210, 0.10) 100%);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 1px 0 rgba(229, 144, 28, 0.06),
+    0 20px 50px -12px rgba(44, 11, 14, 0.06),
+    0 0 0 1px rgba(229, 144, 28, 0.08);
+}
+
+.glass-amber-box {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.glass-amber-box:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.4),
+    0 4px 16px -4px rgba(229, 144, 28, 0.10);
+}
+
+/* Extra-clear crystal variant for buttons/pills */
+.glass-crystal {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.glass-regal-dark {
+  background: rgba(44, 11, 14, 0.65);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid rgba(245, 166, 35, 0.20);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(251, 224, 158, 0.10),
+    0 25px 60px -15px rgba(20, 3, 5, 0.25),
+    0 0 30px rgba(229, 144, 28, 0.08);
+}
+
+/* Saffron Slider */
+input[type=range].slider-regal {
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(to right, #9e1822, #f5a623);
+  height: 4px;
+  border-radius: 9999px;
+  outline: none;
+}
+input[type=range].slider-regal::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe79a 0%, #e5901c 60%, #9e1822 100%);
+  border: 2px solid #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(119, 15, 23, 0.35), 0 0 12px rgba(245, 166, 35, 0.5);
+  transition: transform 0.2s ease;
+}
+input[type=range].slider-regal::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Slow Spin Animation */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spinSlow 140s linear infinite;
+}
+
+/* Selection */
+::selection {
+  background: #9e1822;
+  color: #ffe79a;
+}
