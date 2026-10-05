@@ -130,7 +130,7 @@ Harmony/
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you are participating in **Hacktoberfest**:
+Contributions are welcome! It would be great if you give me some suggestions or help me with some code:
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/CreativeFeature`)
@@ -148,9 +148,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📍 Contact & Visits
 
-**Harmony Home Textiles**  
-China Town Shopping Complex, Shop No: 141,  
-Sundhara, Kathmandu, Nepal  
-- 👤 **Contact:** Shyam Mudbhari  
-- ✉️ **Email:** [shyammudbhari2151@gmail.com](mailto:shyammudbhari2151@gmail.com)  
-- 📞 **Phone:** 01-5312761  
+
+T
