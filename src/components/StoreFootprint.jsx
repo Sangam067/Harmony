@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function StoreFootprint() {
+export default function StoreFootprint({ onGoToAdmin }) {
   const [copied, setCopied] = useState(false);
   const address = "China Town shopping Complex, Shop no: 141, Sundhara, Bagdurbbar, Kathmandu, Nepal";
 
@@ -133,8 +133,22 @@ export default function StoreFootprint() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-16 text-center text-xs text-[#6e3a2c] font-light">
+        <footer className="mt-16 text-center text-xs text-[#6e3a2c] font-light space-y-1">
           <p>Harmony Home Textiles &middot; China Town Shopping Complex #141 &middot; Kathmandu, Nepal</p>
+          <p>
+            <a
+              href="/admin2151"
+              onClick={(e) => {
+                if (onGoToAdmin) {
+                  e.preventDefault();
+                  onGoToAdmin();
+                }
+              }}
+              className="text-[10px] text-[#854a39]/70 hover:text-[#9e1822] tracking-wider uppercase transition-colors"
+            >
+              Atelier Portal (/admin2151)
+            </a>
+          </p>
         </footer>
 
       </div>

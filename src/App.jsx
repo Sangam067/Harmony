@@ -7,15 +7,23 @@ import AiMaterialStudio from './components/AiMaterialStudio';
 import StoreFootprint from './components/StoreFootprint';
 import SpecModal from './components/SpecModal';
 import AllGoodsPage from './components/AllGoodsPage';
+import AdminPanel from './components/AdminPanel';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState('home'); // 'home' or 'all-collections'
+  const [currentView, setCurrentView] = useState('home'); // 'home', 'all-collections', or 'admin'
   const [previewItem, setPreviewItem] = useState(null);
 
-  // Sync with URL hash
+  // Sync with URL pathname, hash, and search for /admin2151 route
   useEffect(() => {
-    const handleHash = () => {
-      if (window.location.hash === '#all-collections') {
+    const handleRoute = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+
+      if (path.includes('admin2151') || hash.includes('admin2151') || search.includes('admin2151')) {
+        setCurrentView('admin');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#all-collections') {
         setCurrentView('all-collections');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
@@ -23,19 +31,43 @@ export default function App() {
       }
     };
 
-    handleHash();
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+    handleRoute();
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('popstate', handleRoute);
+    return () => {
+      window.removeEventListener('hashchange', handleRoute);
+      window.removeEventListener('popstate', handleRoute);
+    };
   }, []);
+
+  const goToAdmin = () => {
+    try {
+      window.history.pushState(null, '', '/admin2151');
+    } catch (e) {
+      window.location.hash = '#admin2151';
+    }
+    setCurrentView('admin');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const goToAllCollections = () => {
     window.location.hash = 'all-collections';
+    if (window.location.pathname.includes('admin2151')) {
+      try {
+        window.history.pushState(null, '', '/#all-collections');
+      } catch (e) {}
+    }
     setCurrentView('all-collections');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const goHome = () => {
     window.location.hash = 'hero';
+    if (window.location.pathname.includes('admin2151')) {
+      try {
+        window.history.pushState(null, '', '/');
+      } catch (e) {}
+    }
     setCurrentView('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -61,15 +93,23 @@ export default function App() {
       {/* 1. Warm Amber Texture Canvas with Low Opacity */}
       <BackgroundCrystallized />
 
-      {/* 2. Navigation Header with Harmony Logo */}
-      <ResnHeader 
-        currentView={currentView}
-        onGoHome={goHome}
-        onViewAllCollections={goToAllCollections}
-      />
+      {/* 2. Navigation Header with Harmony Logo (hidden in admin view) */}
+      {currentView !== 'admin' && (
+        <ResnHeader 
+          currentView={currentView}
+          onGoHome={goHome}
+          onViewAllCollections={goToAllCollections}
+        />
+      )}
 
       {/* 3. Conditional Page View */}
-      {currentView === 'all-collections' ? (
+      {currentView === 'admin' ? (
+        /* Dedicated Atelier Admin Panel at /admin2151 */
+        <AdminPanel 
+          onExitAdmin={goHome} 
+          onOpenPreview={(item) => setPreviewItem(item)} 
+        />
+      ) : currentView === 'all-collections' ? (
         /* Dedicated Full-Page Goods Showroom */
         <AllGoodsPage 
           onBack={goHome} 
@@ -84,13 +124,11 @@ export default function App() {
             onViewAllCollections={goToAllCollections}
           />
 
-
-
           {/* Bespoke AI Material Matchmaker */}
           <AiMaterialStudio />
 
           {/* Flagship Store Footprint & Boutique Details */}
-          <StoreFootprint />
+          <StoreFootprint onGoToAdmin={goToAdmin} />
         </>
       )}
 
